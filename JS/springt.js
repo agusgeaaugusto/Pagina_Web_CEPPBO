@@ -160,3 +160,10 @@ function openGalleryModal(galleryKey) {
     // Mostrar el modal
     $('#galleryModal').modal('show');
 }
+// script.js
+
+// Manejar los clics en las imágenes de la galería para abrir el modal con imágenes adicionales
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.open-gallery').forEach(item => {
+        item.addEventListener
+
