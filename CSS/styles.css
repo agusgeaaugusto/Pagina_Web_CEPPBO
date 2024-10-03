@@ -1,17 +1,63 @@
+/* Estilo Global */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Roboto', Arial, sans-serif; /* Fuente más moderna */
+    background-color: #f0f0f5; /* Color de fondo suave para mejor contraste */
     color: #333;
+    line-height: 1.6;
 }
 
+/* Barra de Navegación */
 .navbar {
     background-color: #800020; /* Bordó */
+    padding: 1rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+    margin-right: 10px;
 }
 
 .navbar a {
-    color: #fff !important;
+    color: #ffffff !important;
+    font-weight: 500;
 }
 
+.navbar .nav-link:hover {
+    color: #cc0000 !important;
+    text-decoration: underline;
+}
+
+/* Menú Desplegable (Dropdown) */
+.nav-link.dropdown-toggle {
+    color: #dc0202;
+    background-color: transparent;
+}
+
+.dropdown-menu {
+    background-color: #f8f9fa00; /* Fondo con más contraste */
+    border: 1px solid #ffffff00; /* Bordes para mayor visibilidad */
+    min-width: 220px; /* Ajustar el ancho mínimo */
+}
+
+.dropdown-item {
+    color: #333; /* Color de texto oscuro para legibilidad */
+    padding: 10px 15px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #ffffff; /* Color de fondo al pasar el mouse */
+    color: #6f1414; /* Texto visible al resaltar */
+}
+
+/* Estilo activo del botón "Todos los Años" */
+.filter-button-year.active {
+    font-weight: bold;
+    background-color:  #ffffff;
+    color: #900d0d;
+}
+
+/* Sección Hero */
 .hero-section {
     background: repeating-linear-gradient(
         45deg,
@@ -20,28 +66,124 @@ body {
         #a52a2a 10px,
         #a52a2a 20px
     );
-    color: #fff;
+    color: #ffffff;
     text-align: center;
-    padding: 50px 20px;
+    padding: 80px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
-} 
+    min-height: 600px; /* Más altura para destacar la sección hero */
+    position: relative;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
 .hero-logo {
-    height: 100px;
-    margin-bottom: 20px;
+    height: 150px;
+    margin-bottom: 30px;
 }
 
 .hero-title {
-    font-size: 2.5em;
+    font-size: 3em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 15px 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .hero-subtitle {
-    font-size: 1.2em;
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+/* Botones de Curso */
+.course-button {
+    background-color: #800020;
+    color: #ffffff;
+    margin: 10px;
+    padding: 15px 25px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.course-button:hover {
+    background-color: #cc0000;
+    transform: scale(1.05);
+}
+
+/* Botones de Filtro */
+.filter-button,
+.filter-button-year {
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #800020;
+    color: #800020;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.filter-button:hover,
+.filter-button-year:hover {
+    background-color: #800020;
+    color: #ffffff;
+}
+
+/* Galería de Imágenes */
+.gallery-item {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Suavizar bordes */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+/* Pie de Página */
+.footer {
+    background-color: #800020;
+    color: #ffffff;
+    padding: 30px 0;
+    font-size: 0.9em;
+}
+
+.footer a {
+    color: #ffffff;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #ffcccb;
+}
+
+/* Media Queries */
+@media (min-width: 576px) {
+    .course-button {
+        width: auto;
+    }
 }
 
 @media (min-width: 768px) {
@@ -50,48 +192,21 @@ body {
     }
 
     .hero-title {
-        font-size: 3em;
+        font-size: 3.5em;
     }
 
     .hero-subtitle {
-        font-size: 1.5em;
+        font-size: 1.8em;
     }
 }
 
-.hero-section h1 {
-    font-size: 2.5em;
-}
-
-@media (min-width: 768px) {
-    .hero-section {
-        padding: 100px 20px;
+@media (min-width: 992px) {
+    .hero-logo {
+        height: 200px; /* Aumentar tamaño del logo en pantallas grandes */
     }
 
-    .hero-section h1 {
-        font-size: 3em;
+    .footer {
+        font-size: 1em;
     }
 }
 
-.course-button {
-    background-color: #800020; /* Bordó */
-    color: #fff;
-    margin: 10px;
-    width: 100%;
-}
-
-.course-button:hover {
-    background-color: #cc0000; /* Rojo más claro */
-    color: #fff;
-}
-
-@media (min-width: 576px) {
-    .course-button {
-        width: auto;
-    }
-}
-
-.footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
-}
