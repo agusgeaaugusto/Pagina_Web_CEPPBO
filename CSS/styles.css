@@ -1,14 +1,27 @@
+/* Variables de CSS para consistencia y facilidad de mantenimiento */
+:root {
+    --primary-color: #800020;
+    --secondary-color: #cc0000;
+    --background-color: #f0f0f5;
+    --text-color: #333;
+    --white-color: #ffffff;
+    --font-family: 'Roboto', Arial, sans-serif;
+    --transition-duration: 0.3s;
+}
+
 /* Estilo Global */
 body {
-    font-family: 'Roboto', Arial, sans-serif; /* Fuente más moderna */
-    background-color: #f0f0f5; /* Color de fondo suave para mejor contraste */
-    color: #333;
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
 /* Barra de Navegación */
 .navbar {
-    background-color: #800020; /* Bordó */
+    background-color: var(--primary-color);
     padding: 1rem;
 }
 
@@ -18,62 +31,86 @@ body {
 }
 
 .navbar a {
-    color: #ffffff !important;
+    color: var(--white-color) !important;
     font-weight: 500;
 }
 
 .navbar .nav-link:hover {
-    color: #cc0000 !important;
+    color: var(--secondary-color) !important;
     text-decoration: underline;
 }
 
-/* Menú Desplegable (Dropdown) */
-.nav-link.dropdown-toggle {
-    color: #dc0202;
+/* Estilo del Dropdown */
+.nav-item.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    color: var(--white-color);
     background-color: transparent;
+    padding: 10px;
+    transition: background-color var(--transition-duration);
+}
+
+.dropdown-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .dropdown-menu {
-    background-color: #f8f9fa00; /* Fondo con más contraste */
-    border: 1px solid #ffffff00; /* Bordes para mayor visibilidad */
-    min-width: 220px; /* Ajustar el ancho mínimo */
+    background-color: var(--white-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    min-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    margin-top: 10px;
 }
 
+/* Estilo de los Items del Dropdown */
 .dropdown-item {
-    color: #333; /* Color de texto oscuro para legibilidad */
-    padding: 10px 15px;
-    transition: background-color 0.2s;
+    color: var(--primary-color);
+    padding: 12px 20px;
+    transition: background-color var(--transition-duration), color var(--transition-duration);
+    font-weight: 500;
 }
 
 .dropdown-item:hover {
-    background-color: #ffffff; /* Color de fondo al pasar el mouse */
-    color: #6f1414; /* Texto visible al resaltar */
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
 /* Estilo activo del botón "Todos los Años" */
 .filter-button-year.active {
     font-weight: bold;
-    background-color:  #ffffff;
-    color: #900d0d;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+/* Icono del Dropdown */
+.dropdown-toggle::after {
+    content: '\f078'; /* Icono de Font Awesome */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-left: 8px;
+    transition: transform var(--transition-duration);
+}
+
+/* Rotar el Icono cuando el Dropdown está abierto */
+.nav-item.dropdown.show .dropdown-toggle::after {
+    transform: rotate(180deg);
 }
 
 /* Sección Hero */
 .hero-section {
-    background: repeating-linear-gradient(
-        45deg,
-        #800020,
-        #800020 10px,
-        #a52a2a 10px,
-        #a52a2a 20px
-    );
-    color: #ffffff;
+    background: repeating-linear-gradient(45deg, var(--primary-color), var(--primary-color) 10px, #a52a2a 10px, #a52a2a 20px);
+    color: var(--white-color);
     text-align: center;
     padding: 80px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 600px; /* Más altura para destacar la sección hero */
+    min-height: 600px;
     position: relative;
 }
 
@@ -111,19 +148,19 @@ body {
     font-weight: 300;
 }
 
-/* Botones de Curso */
-.course-button {
-    background-color: #800020;
-    color: #ffffff;
-    margin: 10px;
+/* Botones Comunes */
+.button-common {
+    background-color: var(--primary-color);
+    color: var(--white-color);
     padding: 15px 25px;
     border-radius: 5px;
     border: none;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
+    cursor: pointer;
 }
 
-.course-button:hover {
-    background-color: #cc0000;
+.button-common:hover {
+    background-color: var(--secondary-color);
     transform: scale(1.05);
 }
 
@@ -133,29 +170,30 @@ body {
     margin: 5px;
     padding: 10px 20px;
     border-radius: 5px;
-    border: 1px solid #800020;
-    color: #800020;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    transition: all var(--transition-duration) ease;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .filter-button:hover,
 .filter-button-year:hover {
-    background-color: #800020;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--white-color);
 }
 
 /* Galería de Imágenes */
 .gallery-item {
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform var(--transition-duration), opacity var(--transition-duration);
 }
 
 .gallery-item img {
     width: 100%;
     height: auto;
-    border-radius: 10px; /* Suavizar bordes */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra suave */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-item:hover {
@@ -164,24 +202,25 @@ body {
 
 /* Pie de Página */
 .footer {
-    background-color: #800020;
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--white-color);
     padding: 30px 0;
     font-size: 0.9em;
+    text-align: center;
 }
 
 .footer a {
-    color: #ffffff;
-    transition: color 0.3s ease;
+    color: var(--white-color);
+    transition: color var(--transition-duration);
 }
 
 .footer a:hover {
     color: #ffcccb;
 }
 
-/* Media Queries */
+/* Media Queries para adaptabilidad */
 @media (min-width: 576px) {
-    .course-button {
+    .button-common {
         width: auto;
     }
 }
@@ -202,11 +241,48 @@ body {
 
 @media (min-width: 992px) {
     .hero-logo {
-        height: 200px; /* Aumentar tamaño del logo en pantallas grandes */
+        height: 200px;
     }
 
     .footer {
         font-size: 1em;
     }
+}
+/* Efecto de fade-in para la galería */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Estilo del Mapa */
+.map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* Personalización de los botones */
+.btn-primary {
+    background-color: #800020; /* Cambiar a tu color deseado */
+    border-color: #800020; /* Cambiar el borde al mismo color */
+    color: #ffffff; /* Cambiar el color del texto */
+}
+
+/* Cambiar el color de fondo cuando el mouse esté sobre el botón */
+.btn-primary:hover {
+    background-color: #cc0000; /* Color al pasar el mouse */
+    border-color: #cc0000;
+}
+
+/* Cambiar el color cuando el botón está enfocado o activo */
+.btn-primary:focus, .btn-primary:active {
+    background-color: #990019; /* Color cuando está enfocado o activo */
+    border-color: #990019;
 }
 
