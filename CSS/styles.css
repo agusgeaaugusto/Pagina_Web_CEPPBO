@@ -248,6 +248,7 @@ body {
         font-size: 1em;
     }
 }
+
 /* Efecto de fade-in para la galería */
 .fade-in {
     animation: fadeIn 0.5s ease-in;
@@ -261,12 +262,14 @@ body {
         opacity: 1;
     }
 }
+
 /* Estilo del Mapa */
 .map-container {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 /* Personalización de los botones */
 .btn-primary {
     background-color: #800020; /* Cambiar a tu color deseado */
@@ -282,7 +285,6 @@ body {
 
 /* Cambiar el color cuando el botón está enfocado o activo */
 .btn-primary:focus, .btn-primary:active {
-    background-color: #990019; /* Color cuando está enfocado o activo */
-    border-color: #990019;
+    background-color: #cc0000; /* Color al estar activo */
+    border-color: #cc0000;
 }
-
