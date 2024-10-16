@@ -10,13 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const filterValue = button.getAttribute('data-filter');
 
             galleryItems.forEach(item => {
-                if (filterValue === 'all' || item.getAttribute('data-filter') === filterValue) {
-                    item.style.display = 'block';
-                    item.classList.add('fade-in');
-                } else {
-                    item.style.display = 'none';
-                    item.classList.remove('fade-in');
-                }
+                const isVisible = filterValue === 'all' || item.getAttribute('data-filter') === filterValue;
+                item.style.display = isVisible ? 'block' : 'none';
+                item.classList.toggle('fade-in', isVisible);
             });
 
             // Eliminar la clase activa de los otros botones y agregarla al botón seleccionado
@@ -76,4 +72,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
