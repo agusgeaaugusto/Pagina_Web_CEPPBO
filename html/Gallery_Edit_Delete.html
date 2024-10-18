@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Imágenes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #800020;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+            color: #800020;
+        }
+
+        .category-container {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            color: #800020;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .post-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 10px;
+        }
+
+        .post {
+            flex: 0 0 auto;
+            width: 200px;
+            box-sizing: border-box;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .post:hover {
+            transform: scale(1.05);
+        }
+
+        .post img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .post h2, .post p {
+            margin-top: 10px;
+            color: #800020;
+        }
+
+        .post-category {
+            font-weight: bold;
+        }
+
+        .post-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            display: none;
+        }
+
+        .icon-buttons {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-btn {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .icon-btn:hover {
+            background-color: #670018;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            overflow: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 14cm;
+            max-height: 80%;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            background-color: #670018;
+        }
+
+        @media (max-width: 768px) {
+            .post {
+                flex: 0 0 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post {
+                flex: 0 0 calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Galería de Publicaciones</h1>
+        <div id="category-container" class="category-container">
+            <!-- Los bloques de categorías aparecerán aquí -->
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <img id="modal-image" src="" alt="Imagen ampliada">
+            <a id="download-link" href="" download>
+                <button class="icon-btn" style="position: absolute; bottom: 10px; right: 10px;"><i class="fas fa-download"></i></button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const categoryContainer = document.getElementById('category-container');
+            const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+            if (posts.length > 0) {
+                const categories = {};
+
+                posts.forEach(post => {
+                    if (!categories[post.category]) {
+                        categories[post.category] = [];
+                    }
+                    categories[post.category].push(post);
+                });
+
+                for (const category in categories) {
+                    const categoryElement = document.createElement('div');
+                    categoryElement.classList.add('category-block');
+                    categoryElement.innerHTML = `
+                        <h2 class="category-title">${category}</h2>
+                        <div class="post-container">
+                        </div>
+                    `;
+
+                    const postContainer = categoryElement.querySelector('.post-container');
+                    categories[category].forEach((post, index) => {
+                        const postElement = document.createElement('div');
+                        postElement.classList.add('post');
+                        postElement.innerHTML = `
+                            <div class="icon-buttons">
+                                <a href="${post.image}" download>
+                                    <button class="icon-btn"><i class="fas fa-download"></i></button>
+                                </a>
+                                <button class="icon-btn" onclick="viewImage('${post.image}')"><i class="fas fa-search-plus"></i></button>
+                            </div>
+                            <img src="${post.image}" alt="Imagen cargada">
+                            <h2>${post.description}</h2>
+                            <p class="post-category">Categoría: ${post.category}</p>
+                        `;
+                        postContainer.appendChild(postElement);
+                    });
+
+                    categoryContainer.appendChild(categoryElement);
+                }
+            } else {
+                categoryContainer.innerHTML = "<p>No hay publicaciones disponibles.</p>";
+            }
+        };
+
+        function viewImage(imageUrl) {
+            const modal = document.getElementById('modal');
+            const modalImage = document.getElementById('modal-image');
+            const downloadLink = document.getElementById('download-link');
+
+            modalImage.src = imageUrl;
+            downloadLink.href = imageUrl;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
